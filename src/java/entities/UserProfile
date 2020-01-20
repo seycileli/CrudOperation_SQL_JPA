@@ -1,0 +1,95 @@
+package com.critix.entities;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "user_profile")
+public class UserProfile implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @Column(name = "id")
+    private int userId;
+
+    @Basic
+    @Column(name = "f_name")
+    private String fName;
+
+    @Basic
+    @Column(name = "l_name")
+    private String lName;
+
+    @Basic
+    @Column
+    private String email;
+
+    @Basic
+    @Column
+    private String password;
+
+    public UserProfile() {
+        super();
+    }
+
+    public UserProfile(int userId, String fName, String lName,
+                       String email, String password) {
+        super();
+        this.userId = userId;
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "userId=" + userId +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
