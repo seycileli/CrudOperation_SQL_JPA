@@ -1,6 +1,6 @@
-package com.critix.dao;
+package com.crudtemplate.dao;
 
-import com.critix.entities.UserProfile;
+import com.crudtemplate.entities.UserProfile;
 import java.util.List;
 
 public interface UserProfileInterface {
