@@ -1,7 +1,7 @@
-package com.critix.services;
+package com.crudtemplate.services;
 
-import com.critix.dao.UserProfileDao;
-import com.critix.entities.UserProfile;
+import com.crudtemplate.dao.UserProfileDao;
+import com.crudtemplate.entities.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
