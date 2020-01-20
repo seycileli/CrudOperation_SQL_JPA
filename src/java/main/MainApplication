@@ -1,0 +1,48 @@
+package com.critix.main;
+
+import com.critix.dao.UserProfileDao;
+import com.critix.entities.UserProfile;
+import com.critix.services.UserServices;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainApplication {
+
+    static UserServices userServices = new UserServices();
+    static UserProfileDao userProfileDao = new UserProfileDao();
+    static UserProfile userProfile = new UserProfile();
+
+    public static void main(String[] args) {
+
+        handlerCreateUser();
+//        handlerShowAllUsers();
+//        handlerEditUser(1);
+
+    }
+
+    public static void handlerCreateUser() {
+        userServices.createUser(new UserProfile(1, "", "",
+        "", ""));
+    }
+
+    public static void handlerShowAllUsers() {
+        List<UserProfile> userProfileList;
+        userProfileList = userServices.showAllUsers();
+    }
+
+    public static void handlerEditUser(int currentUserId) {
+
+        UserProfile currentUser = userServices.findUser(1);
+
+        if (currentUser != null) {
+            UserProfile userToUpdate = new UserProfile(1, "", "",
+                    "", "");
+            userServices.editUser(userToUpdate);
+        } else {
+            System.out.println("Error. Read the errors");
+        }
+
+    }
+
+}
