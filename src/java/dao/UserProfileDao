@@ -1,6 +1,6 @@
-package com.critix.dao;
+package com.crudtemplate.dao;
 
-import com.critix.entities.UserProfile;
+import com.crudtemplate.entities.UserProfile;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 public class UserProfileDao implements UserProfileInterface {
 
     //will insert persistence.xml persistence unit name below
-    private final String persistenceString = "Critix";
+    private final String persistenceString = "crudtemplate";
 
     @Override
     public int insertUser(UserProfile user) {
