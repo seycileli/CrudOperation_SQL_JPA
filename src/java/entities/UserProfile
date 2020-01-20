@@ -1,4 +1,4 @@
-package com.critix.entities;
+package com.crudtemplate.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
