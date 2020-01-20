@@ -6,7 +6,7 @@
     <persistence-unit name="CrudTemplate"
             transaction-type="RESOURCE_LOCAL">
 
-        <class>com.critix.entities.UserProfile</class>
+        <class>com.crudtemplate.entities.UserProfile</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
