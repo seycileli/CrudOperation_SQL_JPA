@@ -1,0 +1,90 @@
+package com.javaprojectjpa.main;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.javaprojectjpa.entities.UserProfile;
+import com.javaprojectjpa.service.UserServices;
+
+public class Main {
+
+	static UserServices services = new UserServices();
+	public static void main(String[] args) {
+		System.out.println("\n welcome\n ");
+		
+		/**
+		 * code between here
+		 */
+		
+//		handlerCreateUser();
+//		handlerDeleteUser();
+//		handlerUpdateUser();
+//		handlerEditUser(101);
+//		handlerShowUserById(1301);
+		handlerShowAllUsers();
+		
+		System.out.println("\n goodbye");
+	}
+
+	public static void handlerCreateUser() {
+		
+		services.createUser(new UserProfile("firstName", "lastName", "username"
+				,"email", "password"));
+	}
+	
+	public static void handlerDeleteUser() {
+		//delete, remove
+		
+		services.deleteUserById(1251);
+		
+		/**
+		 * We can add more business logic here in this method
+		 * 		such as;
+		 * 		is this userId valid, does it exist in our SQL database
+		 */
+		
+	}
+	
+	public static void handlerUpdateUser() {
+		//update, edit
+		//update is more sql language
+		
+		services.updateUser(new UserProfile("first name", "lastname", "username",
+				"email", "password"));
+		
+	}
+	
+	public static void handlerEditUser(int currentUserId) {
+//		UserProfile currentUserProfile = services.findUser(1306);
+//		System.out.println(currentUserId);
+//		
+//		UserProfile userToUpdate = new UserProfile("aaa", "bbb", "ccc", "ddd@email", "fff");
+//		services.UpdateUser(userToUpdate);
+//		
+	}
+	
+	public static void handlerShowUserById(int userId) {
+		//by Id, because this is a specific search function
+		//where you can only search for users by id and NOT by name
+		//that can later be created, or you can have a more general search
+		//if you wanted to search for user by first name, last name & etc
+		
+		UserProfile profile = services.showUserById(userId);
+		
+	}
+	
+	public static void handlerShowAllUsers() {
+		//handler used in main app
+		List<UserProfile> usersList;
+		//List<java.generics> <-- is what the obj in between the brackets are called
+		
+		/**
+		 * quick read below
+		 * https://www.tutorialspoint.com/java/java_generics.htm 
+		 */
+		
+		usersList = new ArrayList<>(services.showAll());
+		
+	}
+
+}
