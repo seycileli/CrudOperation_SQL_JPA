@@ -1,0 +1,200 @@
+package com.javaprojectjpa.dao;
+
+import java.util.ArrayList;
+
+import javax.management.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import com.javaprojectjpa.entities.UserProfile;
+import com.sun.xml.bind.v2.schemagen.xmlschema.List;
+
+public class UserProfileDAO implements UserProfileInterface {
+
+	private final String persistenceUnitName = "JavaProjectJPAFactory";
+	
+	@Override
+	public int insertUser(UserProfile userProfile) {
+		/**
+		 * 3 steps
+		 * 
+		 * 1)
+		 * Connect to EntityManagerFactory
+		 * the createEntityManagerFactory("blank")
+		 * blank = the persistence name from persistence xml
+		 * 			instead of copy and pasting the persistence name every time;
+		 * 			we can create an enum or constant version of it, so that way
+		 * 			we only type once, and can use it many times
+		 * 
+		 * 2)
+		 * Getting transaction,
+		 * 		there is ALWAYS a 'begin' and a 'commit'
+		 * 
+		 * 3)
+		 * Make sure to ALWAYS close connection
+		 * 
+		 */
+
+		int result = 0;
+
+		try {	
+			EntityManagerFactory entityManagerFactory = 
+					Persistence.createEntityManagerFactory("JavaProjectJPAFactory");
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
+			entityManager.getTransaction().begin();
+			entityManager.persist(userProfile); //userProfile is coming from the parameter
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			entityManagerFactory.close();		
+			result = -1;
+			
+		} catch (Exception e) {
+			result = 0;
+			e.printStackTrace();
+		} finally {
+			System.out.println("This always HAPPENS!");
+			
+			if (result == 1) {
+				System.out.println("Do more steps here");
+			} else {
+				System.out.println("All is good!");
+			}
+		}
+
+
+		return result;
+	}
+
+	@Override
+	public int deleteUser(int userId) {
+		/**
+		 * Steps:
+		 * 
+		 * 1) Connect, which is the 
+		 * 			EntityManagerFactory (add Persistence.xml name in quotations
+		 * 			EntityManager
+		 * 
+		 * 2) Transaction
+		 * 		Who (for example, from called Obj, Obj obj = new Obj(); << Who
+		 * 		Insert obj name inside .remove function
+		 * 		last, do not forget to save... -- commit, .commit function
+		 * 
+		 * 3) Close
+		 * 		close both, emf & em
+		 * 
+		 */
+		
+		int result = 0;
+		
+		try {
+		EntityManagerFactory entityManagerFactory = 
+				Persistence.createEntityManagerFactory("JavaProjectJPAFactory");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+		UserProfile profile = entityManager.find(UserProfile.class, userId);
+		entityManager.remove(profile);
+		
+		/**
+		 * Always 2 steps,
+		 * 		first find the userId
+		 * 		then you can do as you wish, remove, update etc...
+		 */
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		entityManagerFactory.close();
+		result = 1;
+		
+		} catch (PersistenceException pe) {
+			result = 0;
+			pe.printStackTrace(); //if 0, not successful
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int updateUser(UserProfile userProfile) {
+		int result = 0;
+		
+		try {
+		EntityManagerFactory emf =
+				Persistence.createEntityManagerFactory(persistenceUnitName);
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		UserProfile profile = em.find(UserProfile.class, userProfile); //find
+			profile.setFirstName(userProfile.getFirstName());
+			profile.setLastName(userProfile.getLastName());
+			profile.setUsername(userProfile.getUsername());
+			profile.setEmail(userProfile.getEmail());
+			profile.setPassword(userProfile.getPassword()); //updating the user information
+		em.getTransaction().commit();
+		em.close();
+		emf.close();
+		
+		result = 1;
+		
+		} catch (PersistenceException pe) {
+			result = 0;
+			pe.printStackTrace();
+		}
+		
+		return result; //1 = successful, 0 = unsuccessful
+	}
+
+	@Override
+	public UserProfile getUserByIdProfile(int userId) {
+		//How we find a User
+		
+		int result = 0;
+		UserProfile profile = null;
+		
+		try {
+		EntityManagerFactory emf = 
+				Persistence.createEntityManagerFactory("JavaProjectJPAFactory");
+		EntityManager em = emf.createEntityManager();
+		profile = em.find(UserProfile.class, userId);
+		em.close();
+		emf.close();
+		result = 1;
+		
+		} catch (PersistenceException e) {
+			result = 0;
+			e.printStackTrace();
+		}
+
+		return profile;
+	}
+
+	@Override
+	public List<UserProfile> getAllUsers() {
+		List<UserProfile> userList;
+		
+		EntityManagerFactory emf =
+				Persistence.createEntityManagerFactory(persistenceUnitName);
+		EntityManager em = emf.createEntityManager();
+		
+		Query query = (Query) em.createQuery("SELECT u from UserProfile u");
+		//u is the entity
+		//UserProfile is the table name from SQL
+		//JPQL for above method, the above can be an enum type
+		//https://www.tutorialspoint.com/jpa/jpa_jpql.htm
+		//https://wiki.eclipse.org/EclipseLink/UserGuide/JPA/Basic_JPA_Development/Querying/JPQL
+		//read above and check links to understand JPQL better
+		
+		userList = ((javax.persistence.Query) query).getResultList();
+		
+		for (UserProfile e : userList) {
+			System.out.println(e.toString());
+		}
+		
+		
+		em.close();
+		emf.close();
+		return userList;
+	}
+
+
+}
+ 
