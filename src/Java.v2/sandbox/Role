@@ -1,0 +1,8 @@
+package com.javaprojectjpa.sandbox;
+
+public class Person {
+	
+	String fName;
+	String lName;
+
+}
