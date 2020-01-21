@@ -1,0 +1,3 @@
+Controller package can be created within this folder.
+
+You can find controller name from dispatcher.xml, it should be the "base-package" name
