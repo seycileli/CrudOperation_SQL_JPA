@@ -1,0 +1,12 @@
+package com.javaprojectjpa.sandbox;
+
+public class Users extends Person {
+	
+	/**
+	 * Users extends Person so therefore it will inherit
+	 * 			ALL methods inside of Person (which you'll see in the Main)
+	 */
+	
+	int id;
+	Role roleUsers = new Role();
+}
