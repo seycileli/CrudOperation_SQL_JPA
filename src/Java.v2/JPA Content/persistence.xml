@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="JavaProjectJPAFactory">
+		<!-- The persistence-unit name can be whatever you like -->
+		<!-- This is the BRAIN of our project -->
+
+		<!-- ADD (CLASSES) ENTITIES OR MODELS CREATED FOR BY ME FOR MY APP -->
+		<!-- here you include every class/ entity - as shown in the example below -->
+		<!-- com.javaprojectjpa.entities.classname above -->
+		<!-- class only has to do with database, only add packages related to it -->
+		<class>com.javaprojectjpa.entities.UserProfile</class>
+
+		<!-- ADD PROPERTIES BELOW -->
+		<!-- database connectivity -->
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mariadb://localhost:3306/javaprojectjpa?useSSL=false" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.driver"
+				value="org.mariadb.jdbc.Driver" />
+			<property name="eclipselink.ddl-generation"
+				value="create-tables" />
+			<property name="eclipselink.target-database" value="MYSQL" />
+			<property name="eclipselink.logging.level" value="OFF" />
+		</properties>
+		
+		<!--
+		 
+		 property name="eclipselink.logging.level" value="OFF"
+		 
+		 descriptions below:
+		 
+		OFF
+Disables logging.
+
+You may want to use OFF during production in order to avoid the overhead of logging.
+SEVERE
+
+Logs exceptions indicating that EclipseLink cannot continue, 
+as well as any exceptions generated during login. This includes a stack trace.
+WARNING
+
+Logs exceptions that do not force EclipseLink to stop, 
+including all exceptions not logged with SEVERE level. This does not include a stack trace.
+INFO
+
+(Default) Logs the login/logout per sever session, including the user name. 
+After acquiring the session, detailed information is logged.
+CONFIG
+
+Logs only login, JDBC connection, and database information. 
+You may want to use this log level at deployment time.
+FINE
+
+Logs all SQL You may want to use this log level during debugging and testing, 
+but not at production time.
+FINER
+
+Similar to WARNING, but includes stack trace. 
+You may want to use this log level during debugging and testing, but not at production time.
+FINEST
+
+Similar to FINER, but includes additional low level information. 
+You may want to use this log level during debugging and testing, but not at production time.
+
+ALL
+Logs at the same level as FINEST. -->
+
+	</persistence-unit>
+</persistence>
