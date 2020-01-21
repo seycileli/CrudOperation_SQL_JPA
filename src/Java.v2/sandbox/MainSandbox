@@ -1,0 +1,144 @@
+package com.javaprojectjpa.service;
+
+import java.util.List;
+
+import com.javaprojectjpa.dao.UserProfileDAO;
+import com.javaprojectjpa.entities.UserProfile;
+
+public class UserServices {
+	
+	static UserProfileDAO dao = new UserProfileDAO();
+
+	public void createUser(UserProfile userProfile) {
+		int result = 0;
+		
+		UserProfileDAO dao = new UserProfileDAO();
+		dao.insertUser(userProfile);
+		
+		if (result == 1) {
+			System.out.println("DO MORE HERE");
+			System.out.println("CONGRATS. USER SAVED.");
+			/**
+			 * This means that the application worked and that we can add
+			 * more functions to our application
+			 */
+		} else if (result >= 1) {
+			System.out.println("greater than 1");
+			System.out.println("WAWA FAIL"); //this means that the application failed to run
+		}
+		
+	}
+	
+	public void deleteUserById(int userId) {
+		//deleting a user information from dao
+		
+		UserProfileDAO dao = new UserProfileDAO();
+		int result = dao.deleteUser(userId);
+		
+		if (result == 1) {
+			System.out.println("successfully deleted");
+			//more business logic here
+		} else {
+			System.out.println("Error, can not delete");
+		}
+		
+		/**
+		 * more 'Business Logic' means, if there are more options, methods & etc
+		 * 		that we'll like to insert, such as;
+		 * 		delete only first name
+		 * 		delete only last name
+		 * 		delete bio
+		 * 		delete email from user information record
+		 * 
+		 * 		can not delete userId since userId is a primary key - in thus is unique
+		 */
+		
+		return;
+	}
+	
+	public void updateUser(UserProfile userProfile) {
+		//Update, edit user information
+		
+		//edit is more front end
+		
+		/**
+		 * First we have to find the user
+		 * Second, show the user (front end) which user they'll like to edit
+		 * 
+		 */
+		
+		int flag = dao.updateUser(userProfile);
+		
+		if (flag == 1) {
+			System.out.println("successful update");
+		} else {
+			System.out.println("error");
+		}
+		
+	}
+	
+	public void showUser() {
+		//Show user information??
+		
+	}
+	
+//	@Override
+//	public UserProfile findUser(int userId) {
+//		
+//		UserProfile foundUser = dao.getUserByIdProfile(userId);
+//		
+//		if (foundUser != null) {
+//			
+//			System.out.println(userId);
+//		} else {
+//			System.out.println("error");
+//		}
+//		
+//		return foundUser;
+//	}
+	
+	public UserProfile showUserById(int userId) {
+		
+		UserProfile userFound = dao.getUserByIdProfile(userId);
+		
+		if (userFound != null) {
+			printUsers(userFound);
+		} else {
+			System.out.println("error");
+		}
+		
+		return userFound;
+	}
+	
+	public void printUsers(UserProfile user) {
+		System.out.println(user.toString());
+	}
+	
+	public void findUserById() {
+		
+	}
+	
+	public List<UserProfile> showAll() {
+	//Will use this to show multiple user profile information
+	
+		List<UserProfile> getAllProfile = dao.getAllUsers();
+		
+		if (getAllProfile != null) {
+			System.out.println("success");
+		} else {
+			System.out.println("error");
+		}
+		
+		return getAllProfile;
+	}
+	
+	public void printAllUsers(List<UserProfile> userProfiles) {
+		
+		for (UserProfile i : userProfiles) {
+			System.out.println(i.toString());
+		}
+		
+		
+	}
+	
+}
