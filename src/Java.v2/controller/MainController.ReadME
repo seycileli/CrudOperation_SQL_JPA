@@ -1,3 +1,6 @@
-Controller package can be created within this folder.
+Controller package & class(es) can be created here.
 
-You can find controller name from dispatcher.xml, it should be the "base-package" name
+You can find controller name from dispatcher.xml, it should be the "base-package" name. Best practice is to copy and paste
+the controller name from dispatcher.xml and paste it when creating a new folder.
+
+Followed by naming the class "MyController", "MainController" or "HomeController"
